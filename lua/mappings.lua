@@ -1,11 +1,7 @@
 require("nvchad.mappings")
 
 -- add yours here
-
 local map = vim.keymap.set
-local base46 = require("base46")
-local telescope = require("telescope.builtin")
-local bufline = require("nvchad.tabufline")
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
 
@@ -19,17 +15,17 @@ map("i", "<C-f>", "<Right>", {})
 map("i", "<C-b>", "<Left>", {})
 
 map("n", "<C-h>", function()
-	bufline.prev()
+	require("nvchad.tabufline").prev()
 end)
 map("n", "<C-l>", function()
-	bufline.next()
+	require("nvchad.tabufline").next()
 end)
 
-map("n", "<C-p>", telescope.find_files, {})
+map("n", "<C-p>", ":Telescope find_files <cr>", {})
 map("n", "<C-c>", function()
 	vim.api.nvim_command("bd")
 end, {})
-map("n", "<leader>tp", base46.toggle_transparency)
+map("n", "<leader>tp", require("base46").toggle_transparency)
 map("n", "<leader>fc", function()
 	vim.lsp.buf.code_action({
 		apply = true,
