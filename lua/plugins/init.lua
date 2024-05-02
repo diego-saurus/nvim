@@ -19,4 +19,22 @@ return {
 			git = { enable = true },
 		},
 	},
+	{
+		"nvim-treesitter/nvim-treesitter",
+		opts = {
+			ensure_installed = {
+				-- defaults
+				"vim",
+				"lua",
+				"vimdoc",
+				"printf",
+
+				-- web dev
+				"css",
+				"javascript",
+				"typescript",
+				"tsx",
+			},
+		},
+	},
 }
