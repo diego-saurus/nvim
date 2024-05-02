@@ -5,6 +5,7 @@ return {
 			require("configs.conform")
 		end,
 	},
+
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
@@ -19,6 +20,7 @@ return {
 			git = { enable = true },
 		},
 	},
+
 	{
 		"nvim-treesitter/nvim-treesitter",
 		opts = {
@@ -34,6 +36,20 @@ return {
 				"javascript",
 				"typescript",
 				"tsx",
+			},
+		},
+	},
+
+	{
+		"williamboman/mason.nvim",
+		opts = {
+			ensure_installed = {
+				"lua-language-server",
+				"prettier",
+				"stylua",
+				"css-lsp",
+				"eslint-lsp",
+				"typescript-language-server",
 			},
 		},
 	},
