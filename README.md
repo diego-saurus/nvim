@@ -1,2 +1,2 @@
-# starter
-Starter config for NvChad
+# Configs
+my own neovim config
