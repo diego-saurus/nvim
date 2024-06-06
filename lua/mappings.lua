@@ -35,3 +35,8 @@ map("n", "<leader>fc", function()
 		},
 	})
 end)
+
+map("n", "]d", vim.diagnostic.goto_next, {})
+map("n", "[d", vim.diagnostic.goto_prev, {})
+map("n", "K", vim.lsp.buf.hover, {})
+map("n", "<leader>gr", require("telescope.builtin").lsp_references, {})

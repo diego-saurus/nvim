@@ -13,7 +13,6 @@ return {
 			require("configs.lspconfig")
 		end,
 	},
-
 	{
 		"nvim-tree/nvim-tree.lua",
 		opts = {
@@ -52,5 +51,32 @@ return {
 				"typescript-language-server",
 			},
 		},
+	},
+	{
+		"Exafunction/codeium.nvim",
+		lazy = false,
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"hrsh7th/nvim-cmp",
+		},
+		config = function()
+			require("codeium").setup({})
+		end,
+	},
+	{
+		"hrsh7th/nvim-cmp",
+		opts = function()
+			local conf = require("nvchad.configs.cmp")
+
+			table.insert(conf.sources, 2, { name = "codeium" })
+			return conf
+		end,
+	},
+	{
+		"numToStr/Comment.nvim",
+		lazy = false,
+		config = function()
+			require("Comment").setup()
+		end,
 	},
 }
