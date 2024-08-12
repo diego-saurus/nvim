@@ -9,6 +9,8 @@ local options = {
 		javascriptreact = { "prettier" },
 		scss = { "prettier" },
 		css = { "prettier" },
+		html = { "prettier" },
+		vue = { "prettier" },
 	},
 }
 
