@@ -16,16 +16,16 @@ map("i", "<C-b>", "<Left>", {})
 
 map("n", "<C-h>", function()
 	require("nvchad.tabufline").prev()
-end)
+end, { desc = "Previous buffer" })
 map("n", "<C-l>", function()
 	require("nvchad.tabufline").next()
-end)
+end, { desc = "Next buffer" })
 
 map("n", "<C-p>", ":Telescope find_files <cr>", {})
 map("n", "<C-c>", function()
 	vim.api.nvim_command("bd")
-end, {})
-map("n", "<leader>tp", require("base46").toggle_transparency)
+end, { desc = "Close Buffer" })
+map("n", "<leader>tp", require("base46").toggle_transparency, { desc = "Toggle toggle_transparency" })
 map("n", "<leader>fc", function()
 	vim.lsp.buf.code_action({
 		apply = true,
@@ -34,9 +34,9 @@ map("n", "<leader>fc", function()
 			diagnostics = {},
 		},
 	})
-end)
+end, { desc = "Code actions with remove unused" })
 
-map("n", "]d", vim.diagnostic.goto_next, {})
-map("n", "[d", vim.diagnostic.goto_prev, {})
-map("n", "K", vim.lsp.buf.hover, {})
-map("n", "<leader>gr", require("telescope.builtin").lsp_references, {})
+map("n", "]d", vim.diagnostic.goto_next, { desc = "Next Diagnostic" })
+map("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous Diagnostic" })
+map("n", "K", vim.lsp.buf.hover, { desc = "Hover Documentation" })
+map("n", "<leader>gr", vim.lsp.buf.hover, { desc = "List References" })

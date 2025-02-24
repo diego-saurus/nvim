@@ -5,17 +5,10 @@ local on_init = configs.on_init
 local capabilities = configs.capabilities
 
 local lspconfig = require("lspconfig")
-local servers = { "cssls", "tailwindcss", "eslint", "jdtls", "html", "volar" }
-
-for _, lsp in ipairs(servers) do
-	lspconfig[lsp].setup({
-		on_init = on_init,
-		on_attach = on_attach,
-		capabilities = capabilities,
-	})
-end
+local servers = { "cssls", "eslint", "html", "gopls" }
 
 local util = require("lspconfig.util")
+
 local function get_typescript_server_path(root_dir)
 	local global_ts = "/Users/diegosaurus/.nvm/versions/node/v20.18.1/lib/node_modules/typescript/lib"
 	local found_ts = ""
@@ -32,14 +25,33 @@ local function get_typescript_server_path(root_dir)
 	end
 end
 
-require("lspconfig").volar.setup({
+lspconfig.volar.setup({
 	on_new_config = function(new_config, new_root_dir)
 		new_config.init_options.typescript.tsdk = get_typescript_server_path(new_root_dir)
 	end,
+	on_init = on_init,
+	on_attach = on_attach,
+	capabilities = capabilities,
+})
+
+lspconfig.tailwindcss.setup({
+	filetypes = { "html", "css", "javascript", "javascriptreact", "typescript", "typescriptreact" },
+	settings = {
+		tailwindCSS = {
+			experimental = {
+				classRegex = {
+					{ "clsx\\(([^)]*)\\)" }, -- Recognizes `clsx('bg-blue-500 text-white')`
+					{ "cn\\(([^)]*)\\)" }, -- Recognizes `cn('bg-blue-500 text-white')`
+				},
+			},
+		},
+	},
+	on_init = on_init,
+	on_attach = on_attach,
+	capabilities = capabilities,
 })
 
 lspconfig.ts_ls.setup({
-
 	init_options = {
 		plugins = {
 			{
@@ -60,3 +72,11 @@ lspconfig.ts_ls.setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
 })
+
+for _, lsp in ipairs(servers) do
+	lspconfig[lsp].setup({
+		on_init = on_init,
+		on_attach = on_attach,
+		capabilities = capabilities,
+	})
+end
