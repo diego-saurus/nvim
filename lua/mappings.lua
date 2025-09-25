@@ -1,6 +1,8 @@
 require("nvchad.mappings")
 local builtin = require("telescope.builtin")
 local theme = require("telescope.themes")
+local get_ivy = theme.get_ivy
+local ivy = get_ivy()
 
 local map = vim.keymap.set
 
@@ -31,16 +33,18 @@ end, { desc = "Next buffer" })
 map("n", "<leader>fl", ":Telescope flutter commands <cr>", {})
 
 map("n", "<leader>fr", function()
-	builtin.lsp_references(theme.get_ivy())
+	builtin.lsp_references()
 end, { desc = "Lists LSP references for word under the cursor" })
 
 map("n", "<leader>dd", function()
-	builtin.diagnostics(theme.get_ivy())
-end, { desc = "Lists Diagnostics for all open buffers or a specific buffer" })
+	builtin.diagnostics(ivy)
+end, { desc = "Lists Diagnostics for all open buffers" })
 
-map("n", "gd", function()
-	builtin.lsp_type_definitions(theme.get_ivy())
-end, {
+map("n", "<leader>ds", function()
+	builtin.diagnostics(get_ivy({ bufnr = 0 }))
+end, { desc = "Lists Diagnostics for current buffer" })
+
+map("n", "gd", vim.lsp.buf.type_definition, {
 	desc = "Goto the definition of the type of the word under the cursor, if there's only one, otherwise show all options in Telescope",
 })
 

@@ -35,6 +35,9 @@ return {
 				"javascript",
 				"typescript",
 				"tsx",
+
+				-- mobile dev
+				"dart",
 			},
 		},
 	},
@@ -52,31 +55,54 @@ return {
 			},
 		},
 	},
-	{
-		"Exafunction/codeium.nvim",
-		lazy = false,
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"hrsh7th/nvim-cmp",
-		},
-		config = function()
-			require("codeium").setup({})
-		end,
-	},
-	{
-		"hrsh7th/nvim-cmp",
-		opts = function()
-			local conf = require("nvchad.configs.cmp")
-
-			table.insert(conf.sources, 2, { name = "codeium" })
-			return conf
-		end,
-	},
+	-- {
+	-- 	"Exafunction/codeium.nvim",
+	-- 	lazy = false,
+	-- 	dependencies = {
+	-- 		"nvim-lua/plenary.nvim",
+	-- 		"hrsh7th/nvim-cmp",
+	-- 	},
+	-- 	config = function()
+	-- 		require("codeium").setup({})
+	-- 	end,
+	-- },
 	{
 		"numToStr/Comment.nvim",
 		lazy = false,
 		config = function()
 			require("Comment").setup()
 		end,
+	},
+
+	-- {
+	-- 	"github/copilot.vim",
+	-- 	event = "InsertEnter",
+	-- 	config = function()
+	-- 		vim.g.copilot_no_tab_map = true
+	-- 	end,
+	-- },
+
+	{
+		"nvim-flutter/flutter-tools.nvim",
+		lazy = false,
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"stevearc/dressing.nvim", -- optional for vim.ui.select
+		},
+		config = function()
+			require("flutter-tools").setup({
+				ui = {
+					border = "rounded",
+				},
+				dev_log = {
+					enabled = true,
+					open_cmd = "tabnew",
+				},
+			})
+		end,
+	},
+	{
+		"famiu/bufdelete.nvim",
+		lazy = false,
 	},
 }
