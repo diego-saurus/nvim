@@ -84,21 +84,13 @@ return {
 
 	{
 		"nvim-flutter/flutter-tools.nvim",
-		lazy = false,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"stevearc/dressing.nvim", -- optional for vim.ui.select
 		},
+		ft = "dart",
 		config = function()
-			require("flutter-tools").setup({
-				ui = {
-					border = "rounded",
-				},
-				dev_log = {
-					enabled = true,
-					open_cmd = "tabnew",
-				},
-			})
+			require("configs.flutter-tools")
 		end,
 	},
 	{

@@ -30,8 +30,6 @@ map("n", "<C-l>", function()
 end, { desc = "Next buffer" })
 
 -- TELESCOPE
-map("n", "<leader>fl", ":Telescope flutter commands <cr>", {})
-
 map("n", "<leader>fr", function()
 	builtin.lsp_references()
 end, { desc = "Lists LSP references for word under the cursor" })
